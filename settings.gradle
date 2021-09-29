@@ -1,0 +1,3 @@
+rootProject.name = "MusigDemo"
+include ':app'
+include ':musig'
