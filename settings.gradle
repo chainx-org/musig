@@ -1,3 +1,2 @@
-rootProject.name = "MusigDemo"
-include ':app'
+rootProject.name = "Musig"
 include ':musig'
