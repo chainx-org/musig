@@ -25,19 +25,12 @@ public class Musig {
     }
 
     public String getMyReveal(String[] commits, String[] pubkeys) {
-        if (commits.length != pubkeys.length) {
-            return "Error";
-        }
-
         musig = clib.reveal_stage(musig,
                 TextUtils.join("", commits).toString(), TextUtils.join("", pubkeys).toString());
         return clib.get_my_reveal(musig);
     }
 
     public String getMyCosign(String[] reveals, String[] pubkeys) {
-        if (reveals.length != pubkeys.length) {
-            return "Error";
-        }
         musig = clib.cosign_stage(musig, TextUtils.join("", reveals).toString(), TextUtils.join("", pubkeys).toString());
         return clib.get_my_cosign(musig);
     }
