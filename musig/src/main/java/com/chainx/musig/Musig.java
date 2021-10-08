@@ -43,6 +43,14 @@ public class Musig {
         return clib.get_agg_pubkey(TextUtils.join("", pubkeys).toString());
     }
 
+    public String generateMulsigPubkey(String[] aggPubkeys, String innerPubkey) {
+        return clib.generate_mulsig_pubkey(TextUtils.join("", aggPubkeys).toString(), innerPubkey);
+    }
+
+    public String generateControlBlock(String[] aggPubkeys, String innerPubkey, String sigAggPubkey) {
+        return clib.generate_control_block(TextUtils.join("", aggPubkeys).toString(), innerPubkey, sigAggPubkey);
+    }
+
     final CLibrary clib = (CLibrary) Native.load(
             "musig_dll",
             CLibrary.class);
@@ -65,5 +73,9 @@ public class Musig {
         public String get_signature(String reveals, String pubkeys, String cosigns);
 
         public String get_agg_pubkey(String pubkeys);
+
+        public String generate_mulsig_pubkey(String aggPubkeys, String innerPubkey);
+
+        public String generate_control_block(String aggPubkeys, String innerPubkey, String sigAggPubkey);
     }
 }
