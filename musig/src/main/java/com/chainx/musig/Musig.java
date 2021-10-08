@@ -1,4 +1,4 @@
-package com.example.musig;
+package com.chainx.musig;
 
 import android.text.TextUtils;
 import com.sun.jna.Library;

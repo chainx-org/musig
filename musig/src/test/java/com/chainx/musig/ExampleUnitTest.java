@@ -1,4 +1,4 @@
-package com.example.musig;
+package com.chainx.musig;
 
 import org.junit.Test;
 
