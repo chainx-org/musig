@@ -34,15 +34,15 @@ public class Musig {
         return clib.get_my_cosign(musig);
     }
 
-    public String getAggSignature(String[] reveals, String[] cosigns, String[] pubkeys) {
+    public static String getAggSignature(String[] reveals, String[] cosigns, String[] pubkeys) {
         return clib.get_signature(TextUtils.join("", reveals).toString(), TextUtils.join("", pubkeys).toString(), TextUtils.join("", cosigns).toString());
     }
 
-    public String getAggPublicKey(String[] pubkeys) {
+    public static String getAggPublicKey(String[] pubkeys) {
         return clib.get_agg_pubkey(TextUtils.join("", pubkeys).toString());
     }
 
-    final CLibrary clib = (CLibrary) Native.load(
+    final static CLibrary clib = (CLibrary) Native.load(
             "musig_dll",
             CLibrary.class);
 }
