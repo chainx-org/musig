@@ -13,7 +13,7 @@ public class Mast {
         this.threshold = threshold;
     }
 
-    public String generateMulsigPubkey() {
+    public String generateThresholdPubkey() {
         return clib.generate_threshold_pubkey(TextUtils.join("", pubkeys).toString(), threshold);
     }
 
