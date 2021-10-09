@@ -43,12 +43,12 @@ public class Musig {
         return clib.get_agg_pubkey(TextUtils.join("", pubkeys).toString());
     }
 
-    public String generateMulsigPubkey(String[] aggPubkeys, String innerPubkey) {
-        return clib.generate_mulsig_pubkey(TextUtils.join("", aggPubkeys).toString(), innerPubkey);
+    public String generateMulsigPubkey(String[] pubkeys, byte threshold) {
+        return clib.generate_threshold_pubkey(TextUtils.join("", pubkeys).toString(), threshold);
     }
 
-    public String generateControlBlock(String[] aggPubkeys, String innerPubkey, String sigAggPubkey) {
-        return clib.generate_control_block(TextUtils.join("", aggPubkeys).toString(), innerPubkey, sigAggPubkey);
+    public String generateControlBlock(String[] pubkeys, byte threshold, String sigAggPubkey) {
+        return clib.generate_control_block(TextUtils.join("", pubkeys).toString(), threshold, sigAggPubkey);
     }
 
     final CLibrary clib = (CLibrary) Native.load(
@@ -74,8 +74,8 @@ public class Musig {
 
         public String get_agg_pubkey(String pubkeys);
 
-        public String generate_mulsig_pubkey(String aggPubkeys, String innerPubkey);
+        public String generate_threshold_pubkey(String pubkeys, byte threshold);
 
-        public String generate_control_block(String aggPubkeys, String innerPubkey, String sigAggPubkey);
+        public String generate_control_block(String pubkeys, byte threshold, String sigAggPubkey);
     }
 }
