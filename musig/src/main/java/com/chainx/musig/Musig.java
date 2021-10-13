@@ -19,6 +19,10 @@ public class Musig {
         return pubkey;
     }
 
+    public String getMyReveal() {
+        return clib.get_my_reveal(musig);
+    }
+
     public String getMyCosign(String[] reveals, String[] pubkeys) {
         musig = clib.cosign_stage(musig, TextUtils.join("", reveals).toString(), TextUtils.join("", pubkeys).toString());
         return clib.get_my_cosign(musig);
