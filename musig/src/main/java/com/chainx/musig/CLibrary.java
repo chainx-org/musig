@@ -8,10 +8,6 @@ public interface CLibrary extends Library {
 
     public Pointer get_musig(String priv);
 
-    public String get_my_commit(Pointer musig);
-
-    public Pointer reveal_stage(Pointer musig, String commits, String pubkeys);
-
     public String get_my_reveal(Pointer musig);
 
     public Pointer cosign_stage(Pointer musig, String reveals, String pubkeys);

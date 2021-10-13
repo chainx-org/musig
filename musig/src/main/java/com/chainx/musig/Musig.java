@@ -15,18 +15,8 @@ public class Musig {
         musig = clib.get_musig(priv);
     }
 
-    public String getMyCommit() {
-        return clib.get_my_commit(musig);
-    }
-
     public String getMyPubkey() {
         return pubkey;
-    }
-
-    public String getMyReveal(String[] commits, String[] pubkeys) {
-        musig = clib.reveal_stage(musig,
-                TextUtils.join("", commits).toString(), TextUtils.join("", pubkeys).toString());
-        return clib.get_my_reveal(musig);
     }
 
     public String getMyCosign(String[] reveals, String[] pubkeys) {
