@@ -21,4 +21,12 @@ public interface CLibrary extends Library {
     public String generate_threshold_pubkey(String pubkeys, byte threshold);
 
     public String generate_control_block(String pubkeys, byte threshold, String sigAggPubkey);
+
+    public String encode_reveal_stage(Pointer musig);
+
+    public Pointer decode_reveal_stage(String musig);
+
+    public String encode_cosign_stage(Pointer musig);
+
+    public Pointer decode_cosign_stage(String musig);
 }

@@ -28,6 +28,22 @@ public class Musig {
         return clib.get_my_cosign(musig);
     }
 
+    public static String encodeRevealStage(Pointer musig) {
+        return clib.encode_reveal_stage(musig);
+    }
+
+    public static Pointer decodeRevealStage(String musig) {
+        return clib.decode_reveal_stage(musig);
+    }
+
+    public static String encodeCosignStage(Pointer musig) {
+        return clib.encode_cosign_stage(musig);
+    }
+
+    public static Pointer decodeCosignStage(String musig) {
+        return clib.decode_cosign_stage(musig);
+    }
+
     public static String getAggSignature(String[] reveals, String[] cosigns, String[] pubkeys) {
         return clib.get_signature(TextUtils.join("", reveals).toString(), TextUtils.join("", pubkeys).toString(), TextUtils.join("", cosigns).toString());
     }
