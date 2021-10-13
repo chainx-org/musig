@@ -5,19 +5,11 @@ import android.text.TextUtils;
 import com.sun.jna.Native;
 
 public class Mast {
-    String[] pubkeys;
-    byte threshold;
-
-    public Mast(String[] pubkeys, byte threshold) {
-        this.pubkeys = pubkeys;
-        this.threshold = threshold;
-    }
-
-    public String generateThresholdPubkey() {
+    public String generateThresholdPubkey(String[] pubkeys, byte threshold) {
         return clib.generate_threshold_pubkey(TextUtils.join("", pubkeys).toString(), threshold);
     }
 
-    public String generateControlBlock(String sigAggPubkey) {
+    public String generateControlBlock(String[] pubkeys, byte threshold, String sigAggPubkey) {
         return clib.generate_control_block(TextUtils.join("", pubkeys).toString(), threshold, sigAggPubkey);
     }
 

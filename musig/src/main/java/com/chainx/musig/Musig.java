@@ -5,25 +5,20 @@ import com.sun.jna.Native;
 import com.sun.jna.Pointer;
 
 public class Musig {
-    public String privkey;
-    public String pubkey;
-    public Pointer musig;
 
-    public Musig(String priv) {
-        privkey = priv;
-        pubkey = clib.get_my_pubkey(priv);
-        musig = clib.get_musig(priv);
+    public static Pointer getMusig(String priv) {
+        return clib.get_musig(priv);
     }
 
-    public String getMyPubkey() {
-        return pubkey;
+    public static String getMyPubkey(String priv) {
+        return clib.get_my_pubkey(priv);
     }
 
-    public String getMyReveal() {
+    public static String getMyReveal(Pointer musig) {
         return clib.get_my_reveal(musig);
     }
 
-    public String getMyCosign(String[] reveals, String[] pubkeys) {
+    public static String getMyCosign(Pointer musig, String[] reveals, String[] pubkeys) {
         musig = clib.cosign_stage(musig, TextUtils.join("", reveals).toString(), TextUtils.join("", pubkeys).toString());
         return clib.get_my_cosign(musig);
     }
