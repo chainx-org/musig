@@ -1,2 +1,2 @@
-# aar-pub-test
-To test aar publish
+# musig
+Musig api for android.
