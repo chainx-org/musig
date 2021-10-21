@@ -14,6 +14,10 @@ public class Musig {
         return clib.get_my_pubkey(priv);
     }
 
+    public static String getMyPrivkey(String phrase) {
+        return clib.get_my_privkey(phrase);
+    }
+
     public static String getMyReveal(Pointer musig) {
         return clib.get_my_reveal(musig);
     }

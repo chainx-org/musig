@@ -6,6 +6,8 @@ import com.sun.jna.Pointer;
 public interface CLibrary extends Library {
     public String get_my_pubkey(String priv);
 
+    public String get_my_privkey(String phrase);
+
     public Pointer get_musig(String priv);
 
     public String get_my_reveal(Pointer musig);
