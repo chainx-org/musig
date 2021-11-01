@@ -17,6 +17,7 @@ afterEvaluate {
 }
 
 android {
+    ndkVersion "20.0.5594570"
     compileSdkVersion 30
 
     defaultConfig {
