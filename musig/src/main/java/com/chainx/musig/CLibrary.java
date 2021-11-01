@@ -1,34 +1,38 @@
 package com.chainx.musig;
 
-import com.sun.jna.Library;
-import com.sun.jna.Pointer;
+import java.nio.Buffer;
+import java.nio.CharBuffer;
 
-public interface CLibrary extends Library {
-    public String get_my_pubkey(String priv);
+public class CLibrary {
+    static {
+        System.loadLibrary("musig");
+    }
 
-    public String get_my_privkey(String phrase);
+    public static native String get_my_pubkey(String priv);
 
-    public Pointer get_musig(String priv);
+    public static native String get_my_privkey(String phrase);
 
-    public String get_my_reveal(Pointer musig);
+    public static native CharBuffer get_musig(String priv);
 
-    public Pointer cosign_stage(Pointer musig, String reveals, String pubkeys);
+    public static native String get_my_reveal(CharBuffer musig);
 
-    public String get_my_cosign(Pointer musig);
+    public static native CharBuffer cosign_stage(CharBuffer musig, String reveals, String pubkeys);
 
-    public String get_signature(String reveals, String pubkeys, String cosigns);
+    public static native String get_my_cosign(CharBuffer musig);
 
-    public String get_agg_pubkey(String pubkeys);
+    public static native String get_signature(String reveals, String pubkeys, String cosigns);
 
-    public String generate_threshold_pubkey(String pubkeys, byte threshold);
+    public static native String get_agg_pubkey(String pubkeys);
 
-    public String generate_control_block(String pubkeys, byte threshold, String sigAggPubkey);
+    public static native String generate_threshold_pubkey(String pubkeys, byte threshold);
 
-    public String encode_reveal_stage(Pointer musig);
+    public static native String generate_control_block(String pubkeys, byte threshold, String sigAggPubkey);
 
-    public Pointer decode_reveal_stage(String musig);
+    public static native String encode_reveal_stage(CharBuffer musig);
 
-    public String encode_cosign_stage(Pointer musig);
+    public static native CharBuffer decode_reveal_stage(String musig);
 
-    public Pointer decode_cosign_stage(String musig);
+    public static native String encode_cosign_stage(CharBuffer musig);
+
+    public static native CharBuffer decode_cosign_stage(String musig);
 }
