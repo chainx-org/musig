@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="Gradle: ./musig/libs/intellij-core-26.6.3.jar">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/musig/libs/intellij-core-26.6.3.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
