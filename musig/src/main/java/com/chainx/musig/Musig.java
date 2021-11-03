@@ -1,57 +1,78 @@
 package com.chainx.musig;
 
 import android.text.TextUtils;
-import com.sun.jna.Native;
-import com.sun.jna.Pointer;
 
 public class Musig {
+    static {
+        System.loadLibrary("musig_dll");
+    }
 
-    public static Pointer getMusig(String priv) {
-        return clib.get_musig(priv);
+    public static native String get_my_pubkey(String priv);
+
+    public static native String get_my_privkey(String phrase);
+
+    public static native long get_musig(String priv);
+
+    public static native String get_my_reveal(long musig);
+
+    public static native long cosign_stage(long musig, String reveals, String pubkeys);
+
+    public static native String get_my_cosign(long musig);
+
+    public static native String get_signature(String reveals, String pubkeys, String cosigns);
+
+    public static native String get_agg_pubkey(String pubkeys);
+
+    public static native String encode_reveal_stage(long musig);
+
+    public static native long decode_reveal_stage(String musig);
+
+    public static native String encode_cosign_stage(long musig);
+
+    public static native long decode_cosign_stage(String musig);
+
+    public static long getMusig(String priv) {
+        return get_musig(priv);
     }
 
     public static String getMyPubkey(String priv) {
-        return clib.get_my_pubkey(priv);
+        return get_my_pubkey(priv);
     }
 
     public static String getMyPrivkey(String phrase) {
-        return clib.get_my_privkey(phrase);
+        return get_my_privkey(phrase);
     }
 
-    public static String getMyReveal(Pointer musig) {
-        return clib.get_my_reveal(musig);
+    public static String getMyReveal(long musig) {
+        return get_my_reveal(musig);
     }
 
-    public static String getMyCosign(Pointer musig, String[] reveals, String[] pubkeys) {
-        musig = clib.cosign_stage(musig, TextUtils.join("", reveals).toString(), TextUtils.join("", pubkeys).toString());
-        return clib.get_my_cosign(musig);
+    public static String getMyCosign(long musig, String[] reveals, String[] pubkeys) {
+        musig = cosign_stage(musig, TextUtils.join("", reveals).toString(), TextUtils.join("", pubkeys).toString());
+        return get_my_cosign(musig);
     }
 
-    public static String encodeRevealStage(Pointer musig) {
-        return clib.encode_reveal_stage(musig);
+    public static String encodeRevealStage(long musig) {
+        return encode_reveal_stage(musig);
     }
 
-    public static Pointer decodeRevealStage(String musig) {
-        return clib.decode_reveal_stage(musig);
+    public static long decodeRevealStage(String musig) {
+        return decode_reveal_stage(musig);
     }
 
-    public static String encodeCosignStage(Pointer musig) {
-        return clib.encode_cosign_stage(musig);
+    public static String encodeCosignStage(long musig) {
+        return encode_cosign_stage(musig);
     }
 
-    public static Pointer decodeCosignStage(String musig) {
-        return clib.decode_cosign_stage(musig);
+    public static long decodeCosignStage(String musig) {
+        return decode_cosign_stage(musig);
     }
 
     public static String getAggSignature(String[] reveals, String[] cosigns, String[] pubkeys) {
-        return clib.get_signature(TextUtils.join("", reveals).toString(), TextUtils.join("", pubkeys).toString(), TextUtils.join("", cosigns).toString());
+        return get_signature(TextUtils.join("", reveals).toString(), TextUtils.join("", pubkeys).toString(), TextUtils.join("", cosigns).toString());
     }
 
     public static String getAggPublicKey(String[] pubkeys) {
-        return clib.get_agg_pubkey(TextUtils.join("", pubkeys).toString());
+        return get_agg_pubkey(TextUtils.join("", pubkeys).toString());
     }
-
-    final static CLibrary clib = (CLibrary) Native.load(
-            "musig_dll",
-            CLibrary.class);
 }
