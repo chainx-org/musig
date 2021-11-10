@@ -11,7 +11,7 @@ public class Musig {
 
     public static native String get_my_privkey(String phrase);
 
-    public static native long get_musig(String priv);
+    public static native long get_musig(long message, String priv);
 
     public static native String get_my_reveal(long musig);
 
@@ -19,7 +19,7 @@ public class Musig {
 
     public static native String get_my_cosign(long musig);
 
-    public static native String get_signature(String reveals, String pubkeys, String cosigns);
+    public static native String get_signature(long message, String reveals, String pubkeys, String cosigns);
 
     public static native String get_agg_pubkey(String pubkeys);
 
@@ -31,8 +31,8 @@ public class Musig {
 
     public static native long decode_cosign_stage(String musig);
 
-    public static long getMusig(String priv) {
-        return get_musig(priv);
+    public static long getMusig(long message, String priv) {
+        return get_musig(message, priv);
     }
 
     public static String getMyPubkey(String priv) {
@@ -68,8 +68,8 @@ public class Musig {
         return decode_cosign_stage(musig);
     }
 
-    public static String getAggSignature(String[] reveals, String[] cosigns, String[] pubkeys) {
-        return get_signature(TextUtils.join("", reveals).toString(), TextUtils.join("", pubkeys).toString(), TextUtils.join("", cosigns).toString());
+    public static String getAggSignature(long message, String[] reveals, String[] cosigns, String[] pubkeys) {
+        return get_signature(message, TextUtils.join("", reveals).toString(), TextUtils.join("", pubkeys).toString(), TextUtils.join("", cosigns).toString());
     }
 
     public static String getAggPublicKey(String[] pubkeys) {
